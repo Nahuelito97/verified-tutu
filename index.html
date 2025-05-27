@@ -1,97 +1,47 @@
-<!DOCTYPE html>
-<html lang="es">
+<html>
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Verificación de correo</title>
-    <style>
-        body {
-            background-color: #00223a;
-            color: white;
-            font-family: Arial, sans-serif;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-        }
-
-        .logo {
-            width: 200px;
-            margin-bottom: 20px;
-        }
-
-        .message-box {
-            background-color: white;
-            color: #00223a;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .message-box h1 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .message-box p {
-            font-size: 16px;
-        }
-
-        .icon {
-            width: 80px;
-            margin-bottom: 15px;
-        }
-    </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Verificación</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="config.js"></script>
+    <script defer src="verificacion.js"></script>
 </head>
 
-<body>
-    <img src="assets/tutu_logo_azul.png" alt="Logo TUTU" class="logo" />
-    <div class="message-box" id="messageBox">
-        <h1>Verificando tu correo...</h1>
-        <p>Por favor espera un momento.</p>
-    </div>
-    <script>
-        async function verifyEmail() {
-            const params = new URLSearchParams(window.location.search);
-            const code = params.get('code');
-            const state = params.get('state');
-            const type = params.get('type'); // passenger o driver
+<body
+    style="margin: 0; padding: 0; background: linear-gradient(176.07deg, #75CDE9 -3.82%, #1AA3DD 52.65%, #1582B1 103.9%);">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody>
+            <tr>
+                <td style="text-align: center; padding-top: 60px; padding-bottom: 20px;">
+                    <img src="assets/Logo tutu.png" alt="logo" style="max-width: 150px; width: 80%; height: auto;" />
+                </td>
 
-            if (!code || !state || !type) {
-                showError();
-                return;
-            }
-
-            try {
-                const response = await fetch(`https://tutu-dev.ngrok.app/api/email/verify-email?code=${code}&state=${state}&type=${type}`);
-                const messageBox = document.getElementById('messageBox');
-                if (response.ok) {
-                    messageBox.innerHTML = `
-            <h1>¡Verificación exitosa!</h1>
-            <p>Tu dirección de correo ha sido verificada correctamente. Bienvenido a TUTU 🚗</p>
-          `;
-                } else {
-                    showError();
-                }
-            } catch (error) {
-                showError();
-            }
-        }
-
-        function showError() {
-            const messageBox = document.getElementById('messageBox');
-            messageBox.innerHTML = `
-        <h1>Verificación fallida</h1>
-        <p>El enlace de verificación es inválido o ha expirado.<br />Solicita uno nuevo desde la app.</p>
-      `;
-        }
-
-        verifyEmail();
-    </script>
+            </tr>
+            <tr>
+                <td style="text-align: center;">
+                    <img style="margin-top: 141px; width: 15%; min-width: 130px"
+                        src="http://img0.didiglobal.com/static/passport/ns-prefix/passportemail/passport-email/status-fail.png"
+                        alt="status">
+                </td>
+            </tr>
+            <tr>
+                <td id="messageTitle"
+                    style="font-family: PingFangSC-Semibold; font-size: 28px; text-align: center; color: white; padding-top: 28px;">
+                    Verificación Fallida
+                </td>
+            </tr>
+            <tr>
+                <td
+                    style="font-family: PingFangSC-Regular; font-size: 16px; text-align: center; padding-top: 18px; color: white;">
+                    <p id="messageText" style="display: inline-block; max-width: 508px; line-height: 40px;">
+                        Lo sentimos, el enlace de verificación en el que hiciste clic ha expirado o se produjo un error
+                        de acceso. Por favor, solicitá un nuevo enlace para verificar tu correo
+                    </p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 
 </html>
